@@ -28,7 +28,6 @@ func showOrders(orders Orders) {
 		fmt.Println("Price: ", orders.Orders[i].Price)
 		fmt.Println("Quantity: ", orders.Orders[i].Quantity)
 		fmt.Println("______________")
-		fmt.Println("TEST")
 	}
 }
 

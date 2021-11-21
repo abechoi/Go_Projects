@@ -4,5 +4,5 @@
 <p>By Abe Choi</p>
 </div>
 
-1. [Golang Tutorial by Tech With Tim](/tech_with_tim)
-2. [DAO Sim by Abe Choi](/dao_sim)
+1. [Golang Tutorial by Tech With Tim](/Tech_With_Tim)
+2. [DAO Sim by Abe Choi](/DAO_Sim)
