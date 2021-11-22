@@ -38,6 +38,11 @@ go build tutorial.go
 
 ## Data Types
 
+```
+# check data types by printing %T
+fmt.Printf("%T", number)
+```
+
 ### Unsigned Integers (no negatives)
 
 - uint8 / byte (0 to 255)
@@ -78,3 +83,5 @@ name = "Abe"
 
 - true
 - false
+
+
