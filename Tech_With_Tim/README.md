@@ -6,6 +6,7 @@
 1.  [Hello World](#hello-world)
 2.  [Create EXE File](#create-exe-file)
 3.  [Data Types](#data-types)
+4.  [Printing](#printing)
 
 ## Hello World
 
@@ -84,4 +85,93 @@ name = "Abe"
 - true
 - false
 
+## Printing
 
+### Values and Types
+
+```
+# print data types by printing %T
+fmt.Printf("%T", number)
+
+# print values by printing %v
+fmt.Printf("%v", number)
+
+# print literal "%"
+fmt.Printf("%%")
+
+# print boolean by printing %t
+fmt.Printf("%t", bl)
+```
+
+### Integers and Floats
+
+```
+# print integer by base 2, 8, 10, and 16
+fmt.Printf("%b", binary)
+fmt.Printf("%o", octal)
+fmt.Printf("%d", decimal)
+fmt.Printf("%x", hexadecimal)
+
+# print floats by scientific notation, decimal no exponent, and large exponents
+fmt.Printf("%e", scientificNotation)
+fmt.Printf("%f or %F", decimalNoExponent)
+fmt.Printf("%g", largeExponents)
+```
+
+### Strings
+
+```
+# print string by printing %s
+fmt.Printf("%s", abe)
+
+# print double quoted string by printing %q
+fmt.Printf("%q", "abe")
+```
+
+### Width and Precision
+
+```
+# print default width and precision by printing %f
+fmt.Printf("%f", str)
+
+# print width 9 and default precision by printing %f
+fmt.Printf("%9f", str)
+
+# print default width and precision 2 by printing %f
+# 1.2345 => 1.23
+fmt.Printf("%.2f", str)
+
+# print width 9 and precision 2 by printing %f
+fmt.Printf("%9.2f", str)
+
+# print width 9 and precision 0 by printing %f
+fmt.Printf("%9.f", str)
+```
+
+### Padding
+
+```
+# print with padding left
+# '    abe'
+fmt.Printf("%4s", "abe")
+
+# print with padding right
+# 'abe    '
+fmt.Printf("%-4s", "abe")
+
+# print with zeroes as padding
+# '0000abe'
+fmt.Printf("%04s", "abe")
+
+# print with padding of arbitrary length
+# '    abe'
+fmt.Printf("%*s", 4,"abe")
+```
+
+### Sprint
+
+```
+# store sprint into a variable to print
+var out string = fmt.Sprintf("Save this message, and print later.")
+fmt.Println(out)
+```
