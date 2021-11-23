@@ -13,9 +13,10 @@ type Orders struct {
 }
 
 type Order struct {
-	DAO      string `json:"dao"`
-	Price    uint32 `json:"price"`
-	Quantity uint32 `json:quantity`
+	DAO      string  `json:"dao"`
+	Price    float32 `json:"price"`
+	Quantity float32 `json:quantity`
+	ROI      float32 `json:roi`
 }
 
 func showOrders(orders Orders) {
@@ -31,24 +32,43 @@ func showOrders(orders Orders) {
 	}
 }
 
+func calcProjections(order Order) {
+
+	fmt.Println("\nPROJECTIONS BY 5-DAY ROI")
+	fmt.Println("_________________________")
+
+	day := 0
+	quantity := order.Quantity
+	roi := order.ROI
+
+	fmt.Println(quantity)
+
+	for i := 0; i < 73; i++ {
+
+		fmt.Printf("\nDay %-5d %f\n", day, quantity)
+
+		day += 5
+		quantity += quantity * roi
+	}
+
+}
+
 func showProjections(orders Orders) {
 
 	option := 1
-	for option > 0 {
+	for option < 3 {
 
 		fmt.Println("\nEnter option:")
-		fmt.Print("____________\n\n0. Back\n1. MBOX\n2. Z2O\n3. SB\n____________\n: ")
+		fmt.Print("____________\n\n0. Z2O\n1. SB\n2. TIME\n____________\n: ")
 		fmt.Scanln(&option)
 
 		switch option {
 		case 0:
-			fmt.Println("\nBack to main menu...")
+			calcProjections(orders.Orders[option])
 		case 1:
-			fmt.Println("Mobox")
+			calcProjections(orders.Orders[option])
 		case 2:
-			fmt.Println(orders.Orders[0].DAO)
-		case 3:
-			fmt.Println(orders.Orders[1].DAO)
+			calcProjections(orders.Orders[option])
 		default:
 			fmt.Println("\nError: Invalid option")
 		}
@@ -79,7 +99,7 @@ func main() {
 	for option > 0 {
 
 		fmt.Println("\nEnter option:")
-		fmt.Print("____________\n\n0. Exit\n1. Order History\n2. Continue\n____________\n: ")
+		fmt.Print("____________\n\n0. Exit\n1. Order History\n2. Projections\n____________\n: ")
 		fmt.Scanln(&option)
 
 		switch option {
