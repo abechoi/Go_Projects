@@ -31,12 +31,36 @@ func showOrders(orders Orders) {
 	}
 }
 
+func showProjections(orders Orders) {
+
+	option := 1
+	for option > 0 {
+
+		fmt.Println("\nEnter option:")
+		fmt.Print("____________\n\n0. Back\n1. MBOX\n2. Z2O\n3. SB\n____________\n: ")
+		fmt.Scanln(&option)
+
+		switch option {
+		case 0:
+			fmt.Println("\nBack to main menu...")
+		case 1:
+			fmt.Println("Mobox")
+		case 2:
+			fmt.Println(orders.Orders[0].DAO)
+		case 3:
+			fmt.Println(orders.Orders[1].DAO)
+		default:
+			fmt.Println("\nError: Invalid option")
+		}
+	}
+}
+
 func main() {
 
 	// 1. Reading the JSON file
 	ordersFile, err := os.Open("./data/orders.json")
 	if err != nil {
-		log.Fatal("Error: cannot open file - ", err)
+		log.Fatal("Error: Cannot open file - ", err)
 	}
 	defer ordersFile.Close()
 
@@ -64,9 +88,9 @@ func main() {
 		case 1:
 			showOrders(orders)
 		case 2:
-			fmt.Println("\nOption 2")
+			showProjections(orders)
 		default:
-			fmt.Println("\nError: option out of bounds, please pick a number between 0 - 2.")
+			fmt.Println("\nError: Invalid option")
 		}
 	}
 }
