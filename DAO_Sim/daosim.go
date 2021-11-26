@@ -56,18 +56,22 @@ func calcProjections(order Order) {
 func showProjections(orders Orders) {
 
 	option := 1
-	for option < 3 {
+	for option > 0 {
 
 		fmt.Println("\nEnter option:")
-		fmt.Print("____________\n\n0. Z2O\n1. SB\n2. TIME\n____________\n: ")
+		fmt.Print("____________\n\n1. ODAO\n2. OHM\n3. TIME\n4. ROME\n0. Exit\n____________\n: ")
 		fmt.Scanln(&option)
 
 		switch option {
 		case 0:
-			calcProjections(orders.Orders[option])
+			fmt.Println("\nBack to menu...")
 		case 1:
 			calcProjections(orders.Orders[option])
 		case 2:
+			calcProjections(orders.Orders[option])
+		case 3:
+			calcProjections(orders.Orders[option])
+		case 4:
 			calcProjections(orders.Orders[option])
 		default:
 			fmt.Println("\nError: Invalid option")
@@ -99,12 +103,12 @@ func main() {
 	for option > 0 {
 
 		fmt.Println("\nEnter option:")
-		fmt.Print("____________\n\n0. Exit\n1. Order History\n2. Projections\n____________\n: ")
+		fmt.Print("____________\n\n1. Order History\n2. Projections\n0. Exit\n____________\n: ")
 		fmt.Scanln(&option)
 
 		switch option {
 		case 0:
-			fmt.Println("\nGoodbye")
+			fmt.Println("\nGoodbye!")
 		case 1:
 			showOrders(orders)
 		case 2:

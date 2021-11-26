@@ -31,10 +31,12 @@ go run tutorial.go
 # creates tutorial.exe with tutorial.go
 
 # Mac
+go build tutorial.go
 ./tutorial
 
 # Windows
 go build tutorial.go
+tutorial.exe
 ```
 
 ## Data Types
