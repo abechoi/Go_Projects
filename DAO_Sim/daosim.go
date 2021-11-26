@@ -25,31 +25,44 @@ func showOrders(orders Orders) {
 	fmt.Println("______________")
 
 	for i := 0; i < len(orders.Orders); i++ {
-		fmt.Println("\nDAO: " + orders.Orders[i].DAO)
-		fmt.Println("Price: ", orders.Orders[i].Price)
-		fmt.Println("Quantity: ", orders.Orders[i].Quantity)
-		fmt.Println("______________")
+		fmt.Printf("\nDAO: %12s\n", orders.Orders[i].DAO)
+		fmt.Printf("Price: %10.2f\n", orders.Orders[i].Price)
+		fmt.Printf("Quantity: %7.2f\n", orders.Orders[i].Quantity)
+		fmt.Printf("_________________\n")
 	}
 }
 
 func calcProjections(order Order) {
 
 	fmt.Println("\nPROJECTIONS BY 5-DAY ROI")
-	fmt.Println("_________________________")
+	fmt.Println("________________________")
 
 	day := 0
+	dao := order.DAO
+	price := order.Price
 	quantity := order.Quantity
 	roi := order.ROI
 
-	fmt.Println(quantity)
+	value := price * quantity
+	updatedQuantity := quantity
 
 	for i := 0; i < 73; i++ {
 
-		fmt.Printf("\nDay %-5d %f\n", day, quantity)
+		fmt.Printf("\nDay %-5d %12.2f\n", day, updatedQuantity)
 
 		day += 5
-		quantity += quantity * roi
+		updatedQuantity += updatedQuantity * roi
 	}
+	fmt.Println("________________________")
+
+	updatedValue := price * updatedQuantity
+
+	fmt.Printf("_________________________________________\n")
+	fmt.Printf("\nDAO: %12s\n", dao)
+	fmt.Printf("Price: %10.2f\n", price)
+	fmt.Printf("Quantity: %7.2f    ->    %5.2f\n", quantity, updatedQuantity)
+	fmt.Printf("Value: %10.2f    ->    %5.2f\n", value, updatedValue)
+	fmt.Printf("\n_________________________________________\n")
 
 }
 
@@ -59,20 +72,22 @@ func showProjections(orders Orders) {
 	for option > 0 {
 
 		fmt.Println("\nEnter option:")
-		fmt.Print("____________\n\n1. ODAO\n2. OHM\n3. TIME\n4. ROME\n0. Exit\n____________\n: ")
+		fmt.Print("____________\n\n1. ODAO\n2. OHM\n3. TIME\n4. ROME\n5. BBY\n0. Exit\n____________\n: ")
 		fmt.Scanln(&option)
 
 		switch option {
 		case 0:
 			fmt.Println("\nBack to menu...")
 		case 1:
-			calcProjections(orders.Orders[option])
+			calcProjections(orders.Orders[option-1])
 		case 2:
-			calcProjections(orders.Orders[option])
+			calcProjections(orders.Orders[option-1])
 		case 3:
-			calcProjections(orders.Orders[option])
+			calcProjections(orders.Orders[option-1])
 		case 4:
-			calcProjections(orders.Orders[option])
+			calcProjections(orders.Orders[option-1])
+		case 5:
+			calcProjections(orders.Orders[option-1])
 		default:
 			fmt.Println("\nError: Invalid option")
 		}
@@ -103,7 +118,7 @@ func main() {
 	for option > 0 {
 
 		fmt.Println("\nEnter option:")
-		fmt.Print("____________\n\n1. Order History\n2. Projections\n0. Exit\n____________\n: ")
+		fmt.Print("________________\n\n1. Order History\n2. Projections\n0. Exit\n________________\n: ")
 		fmt.Scanln(&option)
 
 		switch option {
