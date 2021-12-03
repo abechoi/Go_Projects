@@ -14,9 +14,9 @@ type Orders struct {
 
 type Order struct {
 	DAO      string  `json:"dao"`
-	Price    float32 `json:"price"`
-	Quantity float32 `json:quantity`
-	ROI      float32 `json:roi`
+	Price    float64 `json:"price"`
+	Quantity float64 `json:quantity`
+	ROI      float64 `json:roi`
 }
 
 func showOrders(orders Orders) {
@@ -26,8 +26,8 @@ func showOrders(orders Orders) {
 
 	for i := 0; i < len(orders.Orders); i++ {
 		fmt.Printf("\nDAO: %12s\n", orders.Orders[i].DAO)
-		fmt.Printf("Price: %10.2f\n", orders.Orders[i].Price)
-		fmt.Printf("Quantity: %7.2f\n", orders.Orders[i].Quantity)
+		fmt.Printf("Price: %10.4f\n", orders.Orders[i].Price)
+		fmt.Printf("Quantity: %7.4f\n", orders.Orders[i].Quantity)
 		fmt.Printf("_________________\n")
 	}
 }
@@ -44,7 +44,9 @@ func calcProjections(order Order) {
 	roi := order.ROI
 
 	value := price * quantity
+
 	updatedQuantity := quantity
+	newQuan := quantity * 2
 
 	for i := 0; i < 73; i++ {
 
@@ -52,16 +54,18 @@ func calcProjections(order Order) {
 
 		day += 5
 		updatedQuantity += updatedQuantity * roi
+		newQuan += newQuan * roi
 	}
 	fmt.Println("________________________")
 
 	updatedValue := price * updatedQuantity
+	value2 := price * newQuan
 
 	fmt.Printf("_________________________________________\n")
 	fmt.Printf("\nDAO: %12s\n", dao)
-	fmt.Printf("Price: %10.2f\n", price)
-	fmt.Printf("Quantity: %7.2f    ->    %5.2f\n", quantity, updatedQuantity)
-	fmt.Printf("Value: %10.2f    ->    %5.2f\n", value, updatedValue)
+	fmt.Printf("Price: %10.4f\n", price)
+	fmt.Printf("Quantity: %7.2f    ->    %5.2f   ->    %5.2f\n", quantity, updatedQuantity, newQuan)
+	fmt.Printf("Value: %10.2f    ->    %5.2f   ->    %5.2f\n", value, updatedValue, value2)
 	fmt.Printf("\n_________________________________________\n")
 
 }
@@ -72,7 +76,7 @@ func showProjections(orders Orders) {
 	for option > 0 {
 
 		fmt.Println("\nEnter option:")
-		fmt.Print("____________\n\n1. ODAO\n2. OHM\n3. TIME\n4. ROME\n5. BBY\n0. Exit\n____________\n: ")
+		fmt.Print("____________\n\n1. ODAO\n2. OHM\n3. TIME\n4. ROME\n0. Exit\n____________\n: ")
 		fmt.Scanln(&option)
 
 		switch option {
