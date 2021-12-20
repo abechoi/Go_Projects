@@ -16,7 +16,7 @@ type Order struct {
 	DAO      string  `json:"dao"`
 	Price    float64 `json:"price"`
 	Quantity float64 `json:quantity`
-	ROI      float64 `json:roi`
+	APR      float64 `json:apr`
 }
 
 func showOrders(orders Orders) {
@@ -34,27 +34,36 @@ func showOrders(orders Orders) {
 
 func calcProjections(order Order) {
 
-	fmt.Println("\nPROJECTIONS BY 5-DAY ROI")
+	fmt.Println("\nPROJECTIONS BY 5-DAY APR")
 	fmt.Println("________________________")
 
 	day := 0
+	rebase := 1
 	dao := order.DAO
 	price := order.Price
 	quantity := order.Quantity
-	roi := order.ROI
+	apr := order.APR
 
 	value := price * quantity
 
 	updatedQuantity := quantity
 	newQuan := quantity * 2
 
-	for i := 0; i < 73; i++ {
+	fmt.Printf("\nDay %-5d %10.4f\n", day, price*updatedQuantity)
+	for i := 0; i < 1095; i++ {
 
-		fmt.Printf("\nDay %-5d %12.2f\n", day, updatedQuantity)
+		fmt.Printf("\nRebase %-5d %12.2f\n", rebase, updatedQuantity)
 
-		day += 5
-		updatedQuantity += updatedQuantity * roi
-		newQuan += newQuan * roi
+		rebase += 1
+		updatedQuantity += updatedQuantity * apr
+		newQuan += newQuan * apr
+
+		if rebase == 4 {
+			day += 1
+			rebase = 1
+			fmt.Printf("\nDay %-5d %10.4f\n", day, price*updatedQuantity)
+		}
+
 	}
 	fmt.Println("________________________")
 
@@ -76,26 +85,17 @@ func showProjections(orders Orders) {
 	for option > 0 {
 
 		fmt.Println("\nEnter option:")
-		fmt.Print("____________\n\n1. ODAO\n2. OHM\n3. TIME\n4. ROME\n0. Exit\n____________\n: ")
+		fmt.Print("____________\n\n1. ICE\n2. JADE\n3. ROME\n0. Exit\n____________\n: ")
 		fmt.Scanln(&option)
 
-		switch option {
-		case 0:
-			fmt.Println("\nBack to menu...")
-		case 1:
+		fmt.Print(len(orders.Orders))
+
+		if option > 0 && option <= len(orders.Orders) {
 			calcProjections(orders.Orders[option-1])
-		case 2:
-			calcProjections(orders.Orders[option-1])
-		case 3:
-			calcProjections(orders.Orders[option-1])
-		case 4:
-			calcProjections(orders.Orders[option-1])
-		case 5:
-			calcProjections(orders.Orders[option-1])
-		default:
-			fmt.Println("\nError: Invalid option")
 		}
+
 	}
+	fmt.Println("\nBack to menu...")
 }
 
 func main() {
